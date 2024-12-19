@@ -19,44 +19,44 @@ void uncontreun() {
     clearScreen();
 
     // Saisie des couleurs à faire deviner
-    cout << "Joueur 1 : Saisissez les couleurs a faire deviner\n(R)ouge (V)ert (B)leu (J)aune pour, \n";
+    cout << "Player 1: Enter the colors to be guessed (R)ed (G)reen (B)lue (Y)ellow for, \n";
     for (int i = 0; i < size(tabOrdi); i++) {
         cout << "Position " << i + 1 << "/4 : ";
         cin >> tabOrdi[i];
-        tabOrdi[i] = toupper(tabOrdi[i]);
+        tabOrdi[i] = static_cast<char>(toupper((tabOrdi[i])));
 
         // Vérification de la saisie
-        while (tabOrdi[i] != 'R' && tabOrdi[i] != 'V' && tabOrdi[i] != 'B' && tabOrdi[i] != 'J') {
-            cout << "Couleur invalide, veuillez saisir (R)ouge (V)ert (B)leu (J)aune : ";
+        while (tabOrdi[i] != 'R' && tabOrdi[i] != 'G' && tabOrdi[i] != 'B' && tabOrdi[i] != 'Y') {
+            cout << "Invalid color, please enter (R)ed (G)reen (B)lue (Y)ellow : ";
             cin >> tabOrdi[i];
-            tabOrdi[i] = toupper(tabOrdi[i]);
+            tabOrdi[i] = static_cast<char>(toupper((tabOrdi[i])));
         }
     }
 
     clearScreen();
-    cout << "\n   --- Debut de la partie ---\n";
+    cout << "\n   --- Starting the game ---\n";
 
     int tour = 1;
 
     // Déroulement du jeu
     for (int i = 0; i < nbTentatives; i++) {
-        cout << "\nTour numero : " << tour << endl;
+        cout << "\nRound number : " << tour << endl;
         cout << "Points : " << nbPoints << "\n";
 
         int compteur = 0; // Réinitialisation du compteur pour ce tour
 
         // Saisie des tentatives
-        cout << "Entrez vos tentatives de devinettes pour les 4 positions :\n";
+        cout << "Enter your guess attempts for the 4 positions :\n";
         for (int j = 0; j < 4; j++) {
             cout << "Position " << j + 1 << "/4 : ";
             cin >> tabJoueur[j];
-            tabJoueur[j] = toupper(tabJoueur[j]);
+            tabJoueur[j] = static_cast<char>(toupper((tabJoueur[j])));
 
             // Vérification de la saisie
             while (tabJoueur[j] != 'R' && tabJoueur[j] != 'V' && tabJoueur[j] != 'B' && tabJoueur[j] != 'J') {
-                cout << "Couleur invalide. Veuillez entrer (R/V/B/J) : ";
+                cout << "Invalid color. Please enter (R/G/B/Y) : ";
                 cin >> tabJoueur[j];
-                tabJoueur[j] = toupper(tabJoueur[j]);
+                tabJoueur[j] = static_cast<char>(toupper(tabJoueur[j]));
             }
         }
 
@@ -73,8 +73,8 @@ void uncontreun() {
         // Condition de victoire
         if (compteur == 4) {
             clearScreen();
-            cout << "\nBravo ! Vous avez devine toutes les couleurs.\n";
-            cout << "Score final : " << nbPoints << " points\n";
+            cout << "\nCongratulations! You've guessed all the colors.\n";
+            cout << "Final score : " << nbPoints << " points\n";
             break;
         } else {
             // Mise à jour des points et préparation pour le tour suivant
@@ -82,8 +82,8 @@ void uncontreun() {
             // Si le joueur n'a plus de points, la partie est terminée et il a perdu
             if (nbPoints <= 0) {
                 clearScreen();
-                cout << "\nVous n'avez plus de points. Partie terminée !\n";
-                cout << "La solution était : ";
+                cout << "\nYou have no more points. Game over!\n";
+                cout << "The solution was : ";
                 for (char c : tabOrdi) {
                     cout << "|" << c << "|";
                 }
@@ -91,8 +91,8 @@ void uncontreun() {
                 break;
             }
 
-            cout << "\n   --- Tour Suivant ---\n\n";
-            cout << compteur << " tentatives correctes au dernier tour";
+            cout << "\n   --- Next Tour ---\n\n";
+            cout << compteur << " correct attempts on the last round";
             tour++;
         }
     }
@@ -100,39 +100,39 @@ void uncontreun() {
 
 
 void uncontrebot() {
-    char couleurs [4] = {'R','V','B','J'};
+    char couleurs [4] = {'R','G','B','Y'};
     char tabJoueur [4] = {};
     char tabOrdi [4] = {};
-    for (int i = 0; i < size(tabOrdi); i++) {
-        tabOrdi[i] = couleurs[(rand()%4)];
+    for (char &c :tabOrdi) {
+        c = couleurs[(rand()%4)];
     }
     int nbTentatives = 10;
     int nbPoints = 10000;
     int tour = 1;
     // Generation des couleurs à faire deviner aleatoirement
-    for (int i = 0; i < size(tabOrdi); i++) {
-        tabOrdi[i] = couleurs[(rand()%4)];
+    for (char &c :tabOrdi) {
+        c = couleurs[(rand()%4)];
     }
-    cout << "\n   --- Debut de la partie ---\n";
+    cout << "\n   --- Starting the game ---\n";
     // Déroulement du jeu
     for (int i = 0; i < nbTentatives; i++) {
-        cout << "\nTour numero : " << tour << endl;
+        cout << "\nRound number : " << tour << endl;
         cout << "Points : " << nbPoints << "\n";
 
         int compteur = 0; // Réinitialisation du compteur pour ce tour
 
         // Saisie des tentatives de devinettes
-        cout << "Entrez vos tentatives de devinettes pour les 4 positions :\n";
+        cout << "Enter your guess attempts for the 4 positions :\n";
         for (int j = 0; j < 4; j++) {
             cout << "Position " << j + 1 << "/4 : ";
             cin >> tabJoueur[j];
-            tabJoueur[j] = toupper(tabJoueur[j]);
+            tabJoueur[j] = static_cast<char>(toupper((tabJoueur[j])));
 
             // Vérification de la saisie
-            while (tabJoueur[j] != 'R' && tabJoueur[j] != 'V' && tabJoueur[j] != 'B' && tabJoueur[j] != 'J') {
-                cout << "Couleur invalide. Veuillez entrer (R/V/B/J) : ";
+            while (tabJoueur[j] != 'R' && tabJoueur[j] != 'G' && tabJoueur[j] != 'B' && tabJoueur[j] != 'Y') {
+                cout << "Invalid color. Please enter (R/G/B/Y) : ";
                 cin >> tabJoueur[j];
-                tabJoueur[j] = toupper(tabJoueur[j]);
+                tabJoueur[j] = static_cast<char>(toupper((tabJoueur[j])));
             }
         }
 
@@ -149,8 +149,8 @@ void uncontrebot() {
         // Condition de victoire
         if (compteur == 4) {
             clearScreen();
-            cout << "\nBravo ! Vous avez devine toutes les couleurs.\n";
-            cout << "Score final : " << nbPoints << " points\n";
+            cout << "\nCongratulations! You've guessed all the colors.\n";
+            cout << "Final score : " << nbPoints << " points\n";
             break;
         } else {
             // Mise à jour des points et préparation pour le tour suivant
@@ -158,8 +158,8 @@ void uncontrebot() {
             // Si le joueur n'a plus de points, la partie est terminée et il a perdu
             if (nbPoints <= 0) {
                 clearScreen();
-                cout << "\nVous n'avez plus de points. Partie terminée !\n";
-                cout << "La solution était : ";
+                cout << "\nYou have no more points. Game over !\n";
+                cout << "The solution was : ";
                 for (char c : tabOrdi) {
                     cout << "|" << c << "|";
                 }
@@ -167,8 +167,8 @@ void uncontrebot() {
                 break;
             }
 
-            cout << "\n   --- Tour Suivant ---\n\n";
-            cout << compteur << " tentatives correctes au dernier tour";
+            cout << "\n   --- Next Round ---\n\n";
+            cout << compteur << " correct attempts on the last round";
             tour++;
         }
     }
@@ -176,7 +176,7 @@ void uncontrebot() {
 
 
 void UnContreBotFacile() {
-    char couleurs [4] = {'R','V','B','J'};
+    char couleurs [4] = {'R','G','B','Y'};
     char tabJoueur [4] = {};
     char tabOrdi [4] = {};
     // Remplir tabOrdi avec des couleurs uniques (Utilisation de ChatGPT pour explications)
@@ -204,26 +204,26 @@ void UnContreBotFacile() {
     int nbTentatives = 10;
     int nbPoints = 10000;
     int tour = 1;
-    cout << "\n   --- Debut de la partie ---\n";
+    cout << "\n   --- Starting the game ---\n";
     // Déroulement du jeu
     for (int i = 0; i < nbTentatives; i++) {
-        cout << "\nTour numero : " << tour << endl;
+        cout << "\nRound number : " << tour << endl;
         cout << "Points : " << nbPoints << "\n";
 
         int compteur = 0; // Réinitialisation du compteur
 
         // Saisie des tentatives de devinettes
-        cout << "Entrez vos tentatives de devinettes pour les 4 positions :\n";
+        cout << "Enter your guess attempts for the 4 positions :\n";
         for (int j = 0; j < 4; j++) {
             cout << "Position " << j + 1 << "/4 : ";
             cin >> tabJoueur[j];
-            tabJoueur[j] = toupper(tabJoueur[j]);
+            tabJoueur[j] = static_cast<char>(toupper((tabJoueur[j])));
 
             // Vérification de la saisie
-            while (tabJoueur[j] != 'R' && tabJoueur[j] != 'V' && tabJoueur[j] != 'B' && tabJoueur[j] != 'J') {
-                cout << "Couleur invalide. Veuillez entrer (R/V/B/J) : ";
+            while (tabJoueur[j] != 'R' && tabJoueur[j] != 'G' && tabJoueur[j] != 'B' && tabJoueur[j] != 'Y') {
+                cout << "Invalid color. Please enter (R/G/B/Y) : ";
                 cin >> tabJoueur[j];
-                tabJoueur[j] = toupper(tabJoueur[j]);
+                tabJoueur[j] = static_cast<char>(toupper((tabJoueur[j])));
             }
         }
 
@@ -240,8 +240,8 @@ void UnContreBotFacile() {
         // vérification des conditions de victoire
         if (compteur == 4) {
             clearScreen();
-            cout << "\nBravo ! Vous avez devine toutes les couleurs.\n";
-            cout << "Score final : " << nbPoints << " points\n";
+            cout << "\nCongratulations! You've guessed all the colors.\n";
+            cout << "Final score : " << nbPoints << " points\n";
             break;
         } else {
             // Si pas de victoire mise à jour des points et préparation pour le tour suivant
@@ -249,8 +249,8 @@ void UnContreBotFacile() {
             // Si le joueur n'a plus de points, la partie est terminée et il a perdu
             if (nbPoints <= 0) {
                 clearScreen();
-                cout << "\nVous n'avez plus de points. Partie terminée !\n";
-                cout << "La solution était : ";
+                cout << "\nYou have no more points. Game over!\n";
+                cout << "The solution was : ";
                 for (char c : tabOrdi) {
                     cout << "|" << c << "|";
                 }
@@ -258,8 +258,8 @@ void UnContreBotFacile() {
                 break;
             }
             //Affichage tour suivant et partie des informations
-            cout << "\n   --- Tour Suivant ---\n\n";
-            cout << compteur << " tentatives correctes au dernier tour";
+            cout << "\n   --- Next Round ---\n\n";
+            cout << compteur << " correct attempts on the last round";
             tour++;
         }
     }
@@ -269,18 +269,20 @@ void UnContreBotFacile() {
 int main() {
     srand(time(nullptr));
     int choix = 0;
-    cout << "\n\n     ---Menu Principal MasterMind---   \n\n 1- 1vs1\n 2- 1vsBot(Facile)\n 3- 1vsBot(100%aleatoire)\n\nSaisie : ";
+    cout << "\n\n     ---MasterMind Main menu---   \n\n 1- 1vs1\n 2- 1vsBot(Easy)\n 3- 1vsBot(100%random)\n\nInput : ";
     cin >> choix;
-    while (choix !=1 && choix !=2 && choix !=3) {
+    while (true) {
         clearScreen();
         switch (choix) {
             case 1:uncontreun();
+            break;
             case 2: UnContreBotFacile();
+            break;
             case 3: uncontreun();
+            break;
             default:
-                cout << "\n\n     ---Menu Principal MasterMind---   \n\n 1- 1vs1\n 2- 1vsBot(Facile)\n 3- 1vsBot(100%aleatoire)\n\n";
-            cout << "(Essayez avec un chiffre compris dans le menu : ) :"; }
+                cout << "\n\n     ---MasterMind Main menu---   \n\n 1- 1vs1\n 2- 1vsBot(Easy)\n 3- 1vsBot(100%random)\n\n";
+                cout << "(Try with a number included in the menu : ) :"; }
         cin >> choix;
     }
-    return 0;
 }
